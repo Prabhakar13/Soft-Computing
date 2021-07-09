@@ -1,0 +1,82 @@
+[System]
+Name='COVID_Diagnose_mamdani'
+Type='mamdani'
+Version=2.0
+NumInputs=7
+NumOutputs=1
+NumRules=6
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Fever'
+Range=[35 42]
+NumMFs=2
+MF1='Yes':'trimf',[34 36 38]
+MF2='No':'trimf',[33 35 37]
+
+[Input2]
+Name='Headache'
+Range=[0 11]
+NumMFs=3
+MF1='LOW':'trimf',[0 0 5]
+MF2='NORMAL':'trimf',[0 5 10]
+MF3='HIGH':'trimf',[5 10 10]
+
+[Input3]
+Name='General Pain'
+Range=[0 11]
+NumMFs=3
+MF1='SMALL':'trimf',[0 0 2]
+MF2='MEDIUM':'trimf',[1 3 6]
+MF3='LARGE':'trimf',[5 10 10]
+
+[Input4]
+Name='Cold'
+Range=[0 1]
+NumMFs=2
+MF1='Yes':'trimf',[0 1 1]
+MF2='No':'trimf',[0 0 0]
+
+[Input5]
+Name='Cough'
+Range=[0 1]
+NumMFs=2
+MF1='No':'trimf',[0 0 0]
+MF2='Yes':'trimf',[0 1 1]
+
+[Input6]
+Name='Sore_Throat'
+Range=[0 1]
+NumMFs=2
+MF1='No':'trimf',[0 0 0]
+MF2='Yes':'trimf',[0 1 1]
+
+[Input7]
+Name='Shortness_of_Breath'
+Range=[0 11]
+NumMFs=3
+MF1='Low':'trimf',[0 0 2]
+MF2='Mild':'trimf',[1 2 5]
+MF3='High':'trimf',[2 6 8]
+
+[Output1]
+Name='COVID_Diagnose'
+Range=[0 11]
+NumMFs=5
+MF1='Very_Low':'trimf',[0 0 3]
+MF2='Low':'trimf',[0 2 5]
+MF3='Medium':'trimf',[2 5 8]
+MF4='High':'trimf',[4 7 10]
+MF5='Very_high':'trimf',[7 10 13]
+
+[Rules]
+2 1 1 2 1 1 1, 1 (1) : 1
+1 1 1 1 1 1 1, 2 (1) : 1
+1 3 2 1 2 1 1, 3 (1) : 1
+1 3 3 1 2 2 3, 5 (1) : 1
+1 2 3 1 2 2 2, 4 (1) : 1
+
